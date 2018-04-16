@@ -1,27 +1,12 @@
-#!/usr/bin/env python3m
+#!/usr/bin/env python3
 
 import gi
 gi.require_version('Gtk', '3.0')
 
 from gi.repository import Gtk
-from subprocess import call
+from lib.player import Player
 
-class Player():
-    def onButtonClose(self, *args):
-        print("Close button pressed")
-        Gtk.main_quit(*args)
-
-    def onButtonPlay(self, button):
-        call(['mocp', '--play'])
-
-    def onButtonPause(self, button):
-        call(['mocp', '--toggle-pause'])
-
-    def onButtonBackward(self, button):
-        call(['mocp', '--next'])
-
-    def onButtonForward(self, button):
-        call(['mocp', '--previous'])
+Player().initializer()
 
 builder = Gtk.Builder()
 builder.add_from_file("gui.glade")
