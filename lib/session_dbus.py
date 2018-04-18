@@ -12,7 +12,7 @@ class Session_DBus(dbus.service.Object):
     # Interface and Method
     @dbus.service.method('com.jotadevs.gmusic.SendInfo')
     def send_info(self, song, artist):
-        return [song, artist]
+        print([song, artist])
 
     def run_dbus_server():
         DBusGMainLoop(set_as_default=True)

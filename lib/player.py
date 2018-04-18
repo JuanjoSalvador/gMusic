@@ -1,18 +1,14 @@
-import _thread
 from subprocess import call, run, PIPE
 from gi.repository import Gtk, GLib
-from lib.session_dbus import Session_DBus
 
 class Player():
-
-    def is_server_active(self):
+    def is_server_active(*args):
         return bool(run(['pidof', 'mocp'], stdout=PIPE).stdout)
 
     def on_button_close(self, *args):
         if self.is_server_active():
             call(['mocp', '-x'])
 
-        GLib.MainLoop().quit()
         Gtk.main_quit(*args)
 
     # BUTTONS
@@ -36,9 +32,5 @@ class Player():
         if switch.get_active():
             if not self.is_server_active():
                 call(['mocp', '-S'])
-
-            # CAUSES A GUI FREEZING!
-            #Session_DBus.run_dbus_server())
         else:
-            #Session_DBus.stop_dbus_server()
             call(['mocp', '-x'])
