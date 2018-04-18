@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
 
 import gi
-import atexit
+import _thread
 from subprocess import call
 gi.require_version('Gtk', '3.0')
 
 from gi.repository import Gtk
+from dbus.mainloop.glib import DBusGMainLoop
+
 from lib.player import Player
+from lib.session_dbus import Session_DBus
 
 class Gmusic():
 
@@ -19,9 +22,14 @@ class Gmusic():
         if Player.is_server_active(self):
             switch_status.set_active(True)
 
+        song_label = builder.get_object('song')
+        artist_label = builder.get_object('artist')
+
         window = builder.get_object("mainWindow")
         window.show_all()
-
-        Gtk.main()
+        try:
+            _thread.start_new_thread(Gtk.main())
+        except Exception as ex:
+            print(ex)
 
 Gmusic()
