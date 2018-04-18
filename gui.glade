@@ -22,12 +22,12 @@
     <property name="can_focus">False</property>
     <property name="stock">gtk-media-forward</property>
   </object>
-  <object class="GtkWindow">
+  <object class="GtkWindow" id="mainWindow">
     <property name="can_focus">False</property>
-    <property name="title" translatable="yes">gMusic</property>
     <property name="default_width">440</property>
     <property name="default_height">250</property>
     <property name="icon_name">applications-multimedia</property>
+    <signal name="destroy" handler="on_button_close" swapped="no"/>
     <child>
       <object class="GtkBox">
         <property name="visible">True</property>
@@ -38,7 +38,7 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <child>
-              <object class="GtkSwitch">
+              <object class="GtkSwitch" id="switch_status">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="halign">end</property>
@@ -46,6 +46,7 @@
                 <property name="margin_right">5</property>
                 <property name="margin_top">5</property>
                 <property name="margin_bottom">5</property>
+                <signal name="notify::active" handler="on_switch_change" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -104,6 +105,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="image">image1</property>
+                <signal name="clicked" handler="on_button_backward" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -117,6 +119,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="image">image2</property>
+                <signal name="clicked" handler="on_button_play" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -130,6 +133,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="image">image3</property>
+                <signal name="clicked" handler="on_button_toggle_pause" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -143,6 +147,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="image">image4</property>
+                <signal name="clicked" handler="on_button_forward" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -163,6 +168,7 @@
 audio-volume-high-symbolic
 audio-volume-low-symbolic
 audio-volume-medium-symbolic</property>
+                <signal name="value-changed" handler="on_volumen_change" swapped="no"/>
                 <child internal-child="plus_button">
                   <object class="GtkButton">
                     <property name="can_focus">True</property>
