@@ -1,5 +1,7 @@
-from subprocess import call, run, PIPE
+import gi
+gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, GLib
+from subprocess import call, run, PIPE
 
 class Player():
     def is_server_active(*args):
