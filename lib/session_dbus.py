@@ -12,8 +12,8 @@ class Session_DBus(dbus.service.Object):
 
     # Interface and Method
     @dbus.service.method('com.jotadevs.gmusic.SendInfo')
-    def send_info(self, song, artist):
-        ApplicationWindow.set_song_label(ApplicationWindow, value=song)
+    def send_info(self, song, artist, img=None):
+        GLib.idle_add(ApplicationWindow.update_metadata, song, artist, img)
 
     def run_dbus_server():
         DBusGMainLoop(set_as_default=True)
