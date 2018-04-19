@@ -16,6 +16,9 @@ class Player():
     # BUTTONS
 
     def on_button_play(self, button):
+        if not self.is_server_active():
+            call(['mocp', '-S'])
+
         call(['mocp', '--play'])
 
     def on_button_toggle_pause(self, button):
