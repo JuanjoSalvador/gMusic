@@ -1,18 +1,15 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 
-import gi
+import gi, threading
 gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk, GObject
+from lib.session_dbus import Session_DBus
+from lib.window import ApplicationWindow
 
-from gi.repository import Gtk
-from lib.player import Player
+app = ApplicationWindow()
 
-Player().initializer()
-
-builder = Gtk.Builder()
-builder.add_from_file("gui.glade")
-builder.connect_signals(Player())
-
-window = builder.get_object("mainWindow")
-window.show_all()
+thread = threading.Thread(target=Session_DBus.run_dbus_server)
+thread.daemon = True
+thread.start()
 
 Gtk.main()

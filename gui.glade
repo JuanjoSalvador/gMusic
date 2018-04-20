@@ -2,28 +2,94 @@
 <!-- Generated with glade 3.22.0 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
-  <object class="GtkApplicationWindow" id="mainWindow">
+  <object class="GtkImage" id="image1">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-media-rewind</property>
+  </object>
+  <object class="GtkImage" id="image2">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-media-play</property>
+  </object>
+  <object class="GtkImage" id="image3">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-media-pause</property>
+  </object>
+  <object class="GtkImage" id="image4">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-media-forward</property>
+  </object>
+  <object class="GtkWindow" id="mainWindow">
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">gMusic</property>
+    <property name="default_width">440</property>
+    <property name="default_height">250</property>
+    <property name="icon_name">applications-multimedia</property>
+    <signal name="destroy" handler="on_button_close" swapped="no"/>
     <child>
       <object class="GtkBox">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="GtkLabel">
+          <object class="GtkBox">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="margin_left">5</property>
-            <property name="margin_right">5</property>
-            <property name="margin_top">20</property>
-            <property name="margin_bottom">20</property>
-            <signal name="destroy" handler="onButtonClose" swapped="no"/>
+            <child>
+              <object class="GtkSwitch" id="switch_status">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="halign">end</property>
+                <property name="margin_left">5</property>
+                <property name="margin_right">5</property>
+                <property name="margin_top">5</property>
+                <property name="margin_bottom">5</property>
+                <signal name="notify::active" handler="on_switch_change" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="pack_type">end</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">end</property>
+                <property name="margin_left">10</property>
+                <property name="margin_right">5</property>
+                <property name="margin_top">5</property>
+                <property name="margin_bottom">5</property>
+                <property name="label" translatable="yes">MOC Server</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="pack_type">end</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
           </object>
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="position">0</property>
+            <property name="position">1</property>
           </packing>
         </child>
         <child>
@@ -32,19 +98,60 @@
             <property name="can_focus">False</property>
             <property name="margin_left">5</property>
             <property name="margin_right">5</property>
+            <property name="margin_top">5</property>
+            <property name="margin_bottom">5</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkLabel" id="song">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_top">10</property>
+                <property name="margin_bottom">5</property>
+                <property name="label" translatable="no"></property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="artist">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_top">5</property>
+                <property name="margin_bottom">10</property>
+                <property name="label" translatable="yes">Artist</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="padding">4</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox" id="control_buttons">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="margin_left">10</property>
+            <property name="margin_right">10</property>
             <property name="margin_top">10</property>
             <property name="margin_bottom">10</property>
-            <property name="homogeneous">True</property>
             <child>
               <object class="GtkButton">
-                <property name="label">gtk-media-rewind</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
-                <property name="image_position">top</property>
-                <property name="always_show_image">True</property>
-                <signal name="clicked" handler="onButtonBackward" swapped="no"/>
+                <property name="image">image1</property>
+                <signal name="clicked" handler="on_button_backward" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -54,14 +161,11 @@
             </child>
             <child>
               <object class="GtkButton">
-                <property name="label">gtk-media-play</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
-                <property name="image_position">top</property>
-                <property name="always_show_image">True</property>
-                <signal name="clicked" handler="onButtonPlay" swapped="no"/>
+                <property name="image">image2</property>
+                <signal name="clicked" handler="on_button_play" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -71,14 +175,11 @@
             </child>
             <child>
               <object class="GtkButton">
-                <property name="label">gtk-media-pause</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
-                <property name="image_position">top</property>
-                <property name="always_show_image">True</property>
-                <signal name="clicked" handler="onButtonPause" swapped="no"/>
+                <property name="image">image3</property>
+                <signal name="clicked" handler="on_button_toggle_pause" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -88,14 +189,11 @@
             </child>
             <child>
               <object class="GtkButton">
-                <property name="label">gtk-media-forward</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
-                <property name="image_position">top</property>
-                <property name="always_show_image">True</property>
-                <signal name="clicked" handler="onButtonForward" swapped="no"/>
+                <property name="image">image4</property>
+                <signal name="clicked" handler="on_button_forward" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -103,11 +201,64 @@
                 <property name="position">3</property>
               </packing>
             </child>
+            <child>
+              <object class="GtkVolumeButton">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="focus_on_click">False</property>
+                <property name="receives_default">True</property>
+                <property name="relief">none</property>
+                <property name="orientation">vertical</property>
+                <property name="value">50</property>
+                <property name="icons">audio-volume-muted-symbolic
+audio-volume-high-symbolic
+audio-volume-low-symbolic
+audio-volume-medium-symbolic</property>
+                <signal name="value-changed" handler="on_volumen_change" swapped="no"/>
+                <child internal-child="plus_button">
+                  <object class="GtkButton">
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="halign">center</property>
+                    <property name="valign">center</property>
+                    <property name="relief">none</property>
+                  </object>
+                </child>
+                <child internal-child="minus_button">
+                  <object class="GtkButton">
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="halign">center</property>
+                    <property name="valign">center</property>
+                    <property name="relief">none</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="pack_type">end</property>
+                <property name="position">4</property>
+              </packing>
+            </child>
           </object>
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="position">1</property>
+            <property name="pack_type">end</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">3</property>
           </packing>
         </child>
       </object>

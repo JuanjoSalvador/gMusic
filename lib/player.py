@@ -1,22 +1,41 @@
-from subprocess import call
-from gi.repository import Gtk
+import gi
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk, GLib
+from subprocess import call, run, PIPE
 
 class Player():
-    def initializer(self):
-        call(['mocp', '-S'])
+    def is_server_active(*args):
+        return bool(run(['pidof', 'mocp'], stdout=PIPE).stdout)
 
-    def onButtonClose(self, *args):
-        call(['mocp', '-x'])
+    def on_button_close(self, *args):
+        if self.is_server_active():
+            call(['mocp', '-x'])
+
         Gtk.main_quit(*args)
 
-    def onButtonPlay(self, button):
+    # BUTTONS
+
+    def on_button_play(self, button):
+        if not self.is_server_active():
+            call(['mocp', '-S'])
+
         call(['mocp', '--play'])
 
-    def onButtonPause(self, button):
+    def on_button_toggle_pause(self, button):
         call(['mocp', '--toggle-pause'])
 
-    def onButtonBackward(self, button):
+    def on_button_backward(self, button):
         call(['mocp', '--previous'])
 
-    def onButtonForward(self, button):
+    def on_button_forward(self, button):
         call(['mocp', '--next'])
+
+    def on_volumen_change(self, event, value):
+        call(['mocp', '--volume={}'.format(round(value * 100))])
+
+    def on_switch_change(self, switch, gparam):
+        if switch.get_active():
+            if not self.is_server_active():
+                call(['mocp', '-S'])
+        else:
+            call(['mocp', '-x'])
