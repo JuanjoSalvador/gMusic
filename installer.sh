@@ -17,6 +17,14 @@ if [[ '--install' = "$1" ]]; then
         cp 'client.py' "$HOME/.moc/scripts/client.py"
     fi
 
+    if [[ -f "$HOME/.moc/config" ]]; then
+        script="OnSongChange = ${HOME}/.moc/scripts/client\.py"
+        sed -r -i "s,^\#?\s*OnSongChange\s*=*.*$,$script," "$HOME/.moc/config"
+    else
+        echo 'No existe el archivo "~/.moc/config", generando uno nuevo'
+        echo "OnSongChange = $HOME/.moc/scripts/client.py" > "$HOME/.moc/config"
+    fi
+
     exit 0
 fi
 
