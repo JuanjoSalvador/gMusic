@@ -20,7 +20,16 @@ if [[ '--install' = "$1" ]]; then
     exit 0
 fi
 
-## Uninstall tool
+## Update Tool
+if [[ '--update' = "$1" ]] && [[ -f /usr/bin/git ]]; then
+    git pull
+else
+    echo 'Para actualizar se necesita la herramienta "git"'
+    echo 'En Debian GNU/Linux puedes instalarlo con "sudo apt install git"'
+fi
+
+
+## Uninstall Tool
 if [[ '--remove' = "$1" ]]; then
 
     if [[ -f "$HOME/.moc/scripts/client.py" ]]; then
