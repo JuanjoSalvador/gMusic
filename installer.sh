@@ -24,25 +24,37 @@ fi
 
 ## Install Tool
 if [[ '--install' = "$1" ]]; then
-    echo 'Instalando'
+    echo 'Installing gMusic'
 
     ## Crear directorio si no existiera
     if [[ ! -d "$HOME/.moc/scripts" ]]; then
-        echo 'Creando el directorio ~/.moc/scripts'
+        echo 'Creating directory ~/.moc/scripts'
         mkdir -p "$HOME/.moc/scripts"
     fi
 
     ## Copiar cliente si no existe
     if [[ ! -f "$HOME/.moc/scripts/client.py" ]]; then
-        echo 'Creando el cliente en ~/.moc/scripts/client.py'
+        echo 'Creating the client at ~/.moc/scripts/client.py'
         cp 'client.py' "$HOME/.moc/scripts/client.py"
+    fi
+
+    # Creates a /usr/local/bin/ access, so you can call gmusic using `$ gmusic`
+    if [[ ! -f "/usr/local/bin/gmusic" ]]; then
+        cp 'bin/gmusic' '/usr/local/bin/gmusic'
+    fi
+
+    # Copy desktop file into .local/share/applications folder
+    if [[ ! -f "$HOME/.local/share/applications/gmusic.desktop" ]]; then
+        cp 'resources/gmusic.desktop' "$HOME/.local/share/applications/gmusic.desktop"
+        # Copy also icon
+        cp 'resources/player.png' "$HOME/.local/share/icons/hicolor/128x128/apps/"
     fi
 
     if [[ -f "$HOME/.moc/config" ]]; then
         script="OnSongChange = ${HOME}/.moc/scripts/client\.py"
         sed -r -i "s,^\#?\s*OnSongChange\s*=*.*$,$script," "$HOME/.moc/config"
     else
-        echo 'No existe el archivo "~/.moc/config", generando uno nuevo'
+        echo 'File "~/.moc/config" does not exists! Generating a new one...'
         echo "OnSongChange = $HOME/.moc/scripts/client.py" > "$HOME/.moc/config"
     fi
 
@@ -69,6 +81,10 @@ if [[ '--remove' = "$1" ]]; then
         echo 'Desinstalación Terminada'
     else
         echo 'No hay nada que desinstalar'
+    fi
+
+    if [[ -f "/usr/local/bin/gmusic" ]]; then
+        cp 'bin/gmusic' '/usr/local/bin/gmusic'
     fi
 
     echo 'Limpiando configuraciones'
