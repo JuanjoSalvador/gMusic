@@ -31,7 +31,7 @@ fi
 ## Update Tool
 if [[ '--update' = "$1" ]] && [[ -f /usr/bin/git ]]; then
     git pull
-else
+elif [[ '--update' = "$1" ]]; then
     echo 'Para actualizar se necesita la herramienta "git"'
     echo 'En Debian GNU/Linux puedes instalarlo con "sudo apt install git"'
 fi
@@ -47,6 +47,9 @@ if [[ '--remove' = "$1" ]]; then
     else
         echo 'No hay nada que desinstalar'
     fi
+
+    echo 'Limpiando configuraciones'
+    sed -r -i "s,^\#?\s*OnSongChange\s*=*.*$,#OnSongChange =," "$HOME/.moc/config"
 
     exit 0
 fi
