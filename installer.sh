@@ -3,17 +3,22 @@
 
 ## Help Options
 if [[ '--help' = "$1" ]] || [[ '-h' = "$1" ]]; then
+    echo ''
     echo 'OPTIONS script:'
     echo ''
     echo -e "$0 --install\tInstall tool"
     echo -e "$0 --update\tUpdate tool from GitHub"
     echo -e "$0 --uninstall\tRemove tool and settings"
+    echo -e "$0 --help\tThis Help"
+    echo -e "$0 -h\tThis Help"
     echo ''
     echo -e "make install\tInstall tool"
     echo -e "make update\tUpdate tool from GitHub"
     echo -e "make uninstall\tRemove tool and settings"
     echo -e "make reinstall\tUninstall and Install from clean"
     echo -e "make help\tThis help"
+
+    exit 0
 fi
 
 
@@ -47,9 +52,11 @@ fi
 ## Update Tool
 if [[ '--update' = "$1" ]] && [[ -f /usr/bin/git ]]; then
     git pull
+    exit 0
 elif [[ '--update' = "$1" ]]; then
     echo 'Para actualizar se necesita la herramienta "git"'
     echo 'En Debian GNU/Linux puedes instalarlo con "sudo apt install git"'
+    exit 1
 fi
 
 
@@ -69,3 +76,5 @@ if [[ '--remove' = "$1" ]]; then
 
     exit 0
 fi
+
+exit 0
