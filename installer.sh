@@ -51,6 +51,7 @@ fi
 
 ## Update Tool
 if [[ '--update' = "$1" ]] && [[ -f /usr/bin/git ]]; then
+    git checkout -- .
     git pull
     exit 0
 elif [[ '--update' = "$1" ]]; then
@@ -58,7 +59,6 @@ elif [[ '--update' = "$1" ]]; then
     echo 'En Debian GNU/Linux puedes instalarlo con "sudo apt install git"'
     exit 1
 fi
-
 
 ## Uninstall Tool
 if [[ '--remove' = "$1" ]]; then
