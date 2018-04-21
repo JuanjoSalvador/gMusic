@@ -8,6 +8,7 @@ session = bus.get_object("com.jotadevs.gmusic", "/com/jotadevs/gmusic")
 
 method_message1 = session.get_dbus_method('send_info', 'com.jotadevs.gmusic.SendInfo')
 
+# get artist and song using moc commands
 artist = run(['mocp', '-Q', '%artist'], stdout=PIPE).stdout
 song   = run(['mocp', '-Q', '%song'], stdout=PIPE).stdout
 

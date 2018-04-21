@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
 import gi
 gi.require_version('Gtk', '3.0')
 
@@ -7,6 +5,9 @@ from gi.repository import Gtk, GObject
 from lib.player import Player
 
 class ApplicationWindow(Gtk.Window):
+    """
+    ApplicationWindow is the main window instance
+    """
 
     builder = Gtk.Builder()
 
@@ -24,5 +25,8 @@ class ApplicationWindow(Gtk.Window):
         window.show_all()
 
     def update_metadata(song=None, artist=None, img=None):
+        """
+        Updates artist and song labels on UI
+        """
         ApplicationWindow.builder.get_object('song').set_text(song)
         ApplicationWindow.builder.get_object('artist').set_text(artist)
