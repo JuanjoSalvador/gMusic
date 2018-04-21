@@ -1,6 +1,22 @@
 #!/usr/bin/env bash
 # -*- ENCODING: UTF-8 -*-
 
+## Help Options
+if [[ '--help' = "$1" ]] || [[ '-h' = "$1" ]]; then
+    echo 'OPTIONS script:'
+    echo ''
+    echo -e "$0 --install\tInstall tool"
+    echo -e "$0 --update\tUpdate tool from GitHub"
+    echo -e "$0 --uninstall\tRemove tool and settings"
+    echo ''
+    echo -e "make install\tInstall tool"
+    echo -e "make update\tUpdate tool from GitHub"
+    echo -e "make uninstall\tRemove tool and settings"
+    echo -e "make reinstall\tUninstall and Install from clean"
+    echo -e "make help\tThis help"
+fi
+
+
 ## Install Tool
 if [[ '--install' = "$1" ]]; then
     echo 'Instalando'

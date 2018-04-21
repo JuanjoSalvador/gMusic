@@ -1,4 +1,4 @@
-.PHONY: all install update reinstall uninstall clean \
+.PHONY: all install update reinstall uninstall clean help \
 
 all: install
 
@@ -12,3 +12,6 @@ reinstall: uninstall install
 
 uninstall clean:
 	./installer.sh --remove
+
+help:
+	./installer.sh --help
