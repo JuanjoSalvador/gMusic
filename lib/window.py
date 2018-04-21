@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
 import gi
 gi.require_version('Gtk', '3.0')
 
@@ -8,7 +6,7 @@ from lib.player import Player
 
 class ApplicationWindow(Gtk.Window):
     """
-    Main window instance
+    ApplicationWindow is the main window instance
     """
 
     builder = Gtk.Builder()
