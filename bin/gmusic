@@ -1,0 +1,9 @@
+#!/bin/bash
+
+#$GMUSIC_DIR='/usr/share/gmusic'
+
+# gMusic directory
+GMUSIC_DIR='/home/juanjo/Proyectos/gMusic'
+
+# Running gMusic using Python3
+/usr/bin/python3 ${GMUSIC_DIR}/main.py

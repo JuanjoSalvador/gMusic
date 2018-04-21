@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=gMusic
+Comment=GTK Frontend for Music on Console
+Exec=/usr/local/bin/gmusic
+Icon=player
+Terminal=false
+Categories=Multimedia;
