@@ -3,6 +3,7 @@ gi.require_version('Gtk', '3.0')
 
 from gi.repository import Gtk, GObject
 from lib.player import Player
+from lib.notification import Notification
 
 class ApplicationWindow(Gtk.Window):
     """
@@ -19,6 +20,7 @@ class ApplicationWindow(Gtk.Window):
 
         _switch_status = app_builder.get_object('switch_status')
         if Player().is_server_active():
+            print('active')
             _switch_status.set_active(True)
 
         window = app_builder.get_object("mainWindow")
@@ -30,3 +32,5 @@ class ApplicationWindow(Gtk.Window):
         """
         ApplicationWindow.builder.get_object('song').set_text(song)
         ApplicationWindow.builder.get_object('artist').set_text(artist)
+        notification = Notification()
+        notification.send(song, artist)
